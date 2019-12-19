@@ -1,0 +1,5 @@
+
+
+alias dk='docker'
+alias -g is='images'
+

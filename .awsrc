@@ -1,0 +1,4 @@
+
+awsssh(){
+ssh -i ~/.aws/ec2dy-eu-v0.2.pem ec2-user@ec2-35-156-49-229.eu-central-1.compute.amazonaws.com;
+}

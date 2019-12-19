@@ -1,0 +1,47 @@
+Create Both
+Expunge Both
+SyncState *
+
+# IMAPAccount personal
+# ...
+
+IMAPAccount work
+Host imap.gmail.com
+User work@gmail.com
+Pass 
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+Path ~/.mutt/mailbox/work/
+Inbox ~/.mutt/mailbox/work/inbox
+
+Channel work-inbox
+Master :work-remote:
+Slave :work-local:
+Patterns "INBOX"
+
+Channel work-sent
+Master :work-remote:"[Gmail]/Sent Mail"
+Slave :work-local:sent
+
+Channel work-trash
+Master :work-remote:"[Gmail]/Trash"
+Slave :work-local:trash
+
+Group work
+Channel work-inbox
+Channel work-sent
+Channel work-trash
+
+# Gmail mailboxes:
+# "All Mail"
+# "Drafts"
+# "Important"
+# "Sent Mail"
+# "Spam"
+# "Starred"
+# "Trash"

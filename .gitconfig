@@ -1,0 +1,51 @@
+[user]
+	email = ali7up7@gmail.com
+	name = alilovethegod
+[alias]
+	co = checkout
+	unstage = reset HEAD
+	last = log -1 HEAD
+	wordscount = !java -Dfile.encoding=UTF-8 -cp \"/home/ali/snap/mvn projects/wordFreq/word-freq-app/target/classes\" com.nefteavtomatica.wordfreqapp.WordsCount  \n
+	m = merge
+	r = rebase
+	c = commit
+	s = status
+	b = branch
+	t = tag
+	l = log
+	ll = log --oneline
+	lp = log --pretty=format:\"%h - %ar : %s\"
+	cm = commit -am
+	ca = commit -am
+	mm = fetch . dev:master
+
+
+
+[core]
+	editor = gedit
+	autocrlf = input
+
+[imap]
+	folder = [Gmail]/Drafts
+	host = imaps://imap.gmail.com
+	user = ali7up7@gmail.com
+	pass = dorosul7huda
+	port = 993
+	sslverify = false
+        
+
+[sendemail]
+	smtpencryption = tls
+	smptserver = smtp.gmail.com
+	smtpuser = ali7up7@gmail.com
+	smtpserverport = 587
+
+[rerere]
+	enabled = true
+
+
+[filesystem "Ubuntu|11.0.4|/dev/sdb4"]
+	timestampResolution = 5000 nanoseconds
+	minRacyThreshold = 7016 microseconds
+[credential]
+	helper = cache --timeout=36000

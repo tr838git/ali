@@ -1,0 +1,5 @@
+ig() {
+echo "$@" >> .gitignore;
+}
+
+alias gi=ig

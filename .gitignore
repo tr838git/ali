@@ -1,0 +1,14 @@
+*/*
+*
+!.*
+*sw*
+*tmp
+.git-credentials
+*~
+*_history
+*errors
+.aws/
+
+.gnupg .gnupg.backup
+.gnupg
+list

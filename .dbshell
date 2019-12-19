@@ -1,0 +1,13 @@
+use twist
+db.users.insert({name:"mike", email:"mike@example.com"})
+db.users.find()
+db.users.find()
+use twist
+db.users.find()
+// insert a document to a new collection called 'users'
+db.users.insert({name:"mike", email:"mike@example.com"})
+// list all documents in the newly created collection
+db.users.find()db.users.insert({name:"mike", email:"mike@example.com"})
+db.users.insert({name:"mike", email:"mike@example.com"})
+db.users.insert({name:"ali", email:"ali@example.com"})
+db.users.find()
