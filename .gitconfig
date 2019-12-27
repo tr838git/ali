@@ -18,7 +18,7 @@
 	cm = commit -am
 	ca = commit -am
 	mm = fetch . dev:master
-
+	untrack = rm --cached
 
 
 [core]

@@ -8,7 +8,14 @@
 *_history
 *errors
 .aws/
-
-.gnupg .gnupg.backup
+.gnupg.backup
 .gnupg
-list
+.viminfo
+.ICEauthority
+.lesshst
+.zcompdump
+.ICEauthority 
+.lesshst 
+.viminfo
+.zcompdump
+

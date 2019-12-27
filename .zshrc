@@ -1,12 +1,33 @@
+#grails
+
+alias gv="grails -v" 
+alias g4="sdk use grails 4.0.1"
+alias gr='grails clean && grails run-app'
+
+
 for rc in  {.dockerrc,.gitrc,.awsrc} 
 do source ~/$rc;
 done;
 
+
 export CDPATH=CDPATH:~/:~/snap:/
+
+
+ 
+# for nanoc and     netlify deploy
+alias -g nc=nanoc
+alias nn=nanocnf
+alias bd=bundle
+alias bde="bundle exec nanoc"
+alias bdv="bundle exec nanoc && bundle exec nanoc view"
+
+
 
 ## java
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+
+alias gs="grails"
 
 alias git=hub
 alias ctl=systemctl
@@ -36,12 +57,75 @@ alias jettyrun="java -jar $JETTY_HOME/start.jar"
 alias j=jettyrun
 alias jr="mvn package jetty:run"
 alias c=clear
-
-
 # If you come from bash you might have to change your $PATH.
 
+# working thanks to the God
+t(){
+sh -c '"/opt/tor-browser_en-US/Browser/start-tor-browser"' "$1"
+}
+
+#copy
+
+alias clc='xclip -selection clipboard'
+alias clp='xclip -selection clipboard -o'
 
 
+nanocnf(){
+nanoc create-site "$1" &&
+cd "$1" &&
+bundle init &&
+echo "gem 'nanoc', '~> 4.0'
+gem 'kramdown'
+gem 'adsf'" >>Gemfile &&
+bundle install &&
+bundle exec nanoc
+#delete index.html, add index.md, than 
+rm content/index.html
+
+echo '
+
+# to deploy to netlify 
+**netlify**
+'>content/index.md 
+setRulesMd
+echo "index.html -> index.md"
+overrideLayout
+bundle exec nanoc &&
+bundle exec nanoc view 
+}
+
+overrideLayout(){
+echo '<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A Brand New Nanoc Site - <%= @item[:title] %></title>
+    <link rel="stylesheet" href="/stylesheet.css">
+
+    <!-- you don't need to keep this, but it's cool for stats! -->
+    <meta name="generator" content="Nanoc <%= Nanoc::VERSION %>">
+  </head>
+  <body>
+    <div id="main">
+      <%= yield %>
+    </div>
+    <div id="sidebar">
+      <h2>Section 1</h2>
+      <ul>
+        <li><a href="/"></a></li>
+        <li><a href="/"></a></li>
+      </ul>
+      <h2></h2>
+      <ul>
+        <li><a href="/"></a></li>
+      </ul>
+    </div>
+  </body>
+</html>
+'> layouts/default.html
+}
+
+ 
 # export PATH=$HOME/bin:/usr/local/bin:$
 
 # Path to your oh-my-zsh installation.
@@ -277,10 +361,6 @@ fi
 
 # Then, source plugins and add commands to $PATH
 #zplug load 
-
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-
 # vi as default
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
@@ -335,7 +415,7 @@ sudo chmod 0665 ~/*marks
 
 # setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 #Left
-setxkbmap -option ctrl:ralt_rctrl
+## setxkbmap -option ctrl:ralt_rctrl  # altGraph as Control 
 
 #xmodmap -e " = btn shift+btn ?? alt+btn maybe-altgr-btn"
 
@@ -371,7 +451,7 @@ v}
 #gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 #gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
-alias ij='coproc intellij-idea-ultimate'
+alias -g  ij='intellij-idea-ultimate'
 alias m='sudo emacs ~/.zshrc ~/README.md'
 alias f='find . -name'
 
@@ -379,3 +459,36 @@ xmodmap ~/.Xmodmap #FIXME maybe not needed
 alias gd='./gradlew '
 alias -g cn='clean'
 alias -g br='bootRun'
+
+export XKB=/usr/share/X11/xkb/symbols
+
+setRulesMd(){
+echo "
+#!/usr/bin/env ruby
+
+compile '/**/*.html' do
+  layout '/default.*'
+end
+
+compile '/**/*.md' do
+  filter :kramdown
+  layout '/default.*'
+end
+
+route '/**/*.{html,md}' do
+  if item.identifier =~ '/index.*'
+    '/index.html'
+  else
+    item.identifier.without_ext + '/index.html'
+  end
+end
+
+compile '/**/*' do
+  write item.identifier.to_s
+end
+
+layout '/**/*', :erb" >Rules && 
+echo 'Rules are set, if the God wished that' 
+0
+}
+
