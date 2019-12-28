@@ -6,6 +6,15 @@ xclip -o > file
 #untrack
 git rm --cached
 
+git stash
+
+git stash pop # also removes stash
+git stash apply 
+
+
+ ./gradlew integrationTest --tests ff.PersonDataServiceIntSpec
+
+
 about:config
 
     browser.chrome.favicons

@@ -3,7 +3,9 @@
 alias gv="grails -v" 
 alias g4="sdk use grails 4.0.1"
 alias gr='grails clean && grails run-app'
-
+alias gsr='grails clean && grails run-app'
+alias gsc='grails compile'
+alias gsck='grailsw check' #did'n work
 
 for rc in  {.dockerrc,.gitrc,.awsrc} 
 do source ~/$rc;
@@ -29,6 +31,7 @@ export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
 
 alias gs="grails"
 
+alias fd='find . -name'
 alias git=hub
 alias ctl=systemctl
 alias gt=gnome-terminal
@@ -492,3 +495,4 @@ echo 'Rules are set, if the God wished that'
 0
 }
 
+sdk use grails 4.0.1

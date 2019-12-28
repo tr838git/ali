@@ -9,6 +9,7 @@
 	m = merge
 	r = rebase
 	c = commit
+	cg = !grails run-app
 	s = status
 	b = branch
 	t = tag
@@ -19,7 +20,7 @@
 	ca = commit -am
 	mm = fetch . dev:master
 	untrack = rm --cached
-
+	
 
 [core]
 	editor = gedit
